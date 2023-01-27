@@ -44,6 +44,14 @@ main {
     border: none;
     border-radius: 3px;
     padding: 12px 10px;
+    cursor: pointer;
+}
+
+.form-save-note:hover,
+.form-save-note:active,
+.form-save-note:focus {
+    background-color: #ffd166;
+    color: #001d3d;
 }
 
 /* section lists of notes style */
