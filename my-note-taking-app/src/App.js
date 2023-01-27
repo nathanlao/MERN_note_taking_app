@@ -4,6 +4,7 @@ import ListNotes from "./components/ListNotes"
 
 export default function App() {
 
+    // Array of notes state
     const [notes, setNotes] = useState([])
 
     // console.log(notes)

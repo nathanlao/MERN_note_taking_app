@@ -26,6 +26,8 @@ body {
     font-size: 16px;
     border-radius: 3px;
     border: none;
+    font-family: inherit;
+    letter-spacing: 0.5px;
 }
 
 .form-textarea {
@@ -59,4 +61,5 @@ body {
     margin: 10px 0;
     padding: 0;
     line-height: 25px;
+    letter-spacing: 0.5px;
 }
