@@ -63,3 +63,11 @@ body {
     line-height: 25px;
     letter-spacing: 0.5px;
 }
+
+.section-list-notes a {
+    color: #4361ee;
+}
+
+.section-list-notes a:active { 
+    color: red;
+}
