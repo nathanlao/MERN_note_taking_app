@@ -11,7 +11,7 @@ export default function App() {
     // console.log(notes)
     
     function handleNotesSubmit(newNote) {
-        if (newNote === "") {
+        if (newNote.trim().length === 0) {
             swal({
                 title: "Warning",
                 text: "Please type down your notes before saving...",
