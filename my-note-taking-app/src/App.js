@@ -30,10 +30,16 @@ export default function App() {
         }
     }
 
+    function handleViewNote(noteId) {
+        // Filter out the with the one note that user click (matched id)
+        const clickedNote = notes.filter((note) => note.id === noteId)
+        console.log(clickedNote[0].body)
+    }
+
     return (
         <main>
             <EditNotes handleNotesSubmit={handleNotesSubmit}/>
-            <ListNotes notes={notes} />
+            <ListNotes notes={notes} handleViewNote={handleViewNote}/>
         </main>
     )
 }
