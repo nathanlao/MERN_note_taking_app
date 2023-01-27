@@ -3,7 +3,8 @@ import React from "react"
 export default function ListNotes(props) {
     // Map over note element with <li> into component
     const noteElements = props.notes.map((note, index) => {
-        return <li key={index}>{note}</li>
+        // split the note with \n and display the note's title onlt
+        return <li key={index}>{note.split("\n")[0]}</li>
     })
 
     return (
