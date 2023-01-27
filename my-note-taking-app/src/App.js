@@ -6,7 +6,7 @@ export default function App() {
 
     const [notes, setNotes] = useState([])
 
-    console.log(notes)
+    // console.log(notes)
     
     function handleNotesSubmit(newNote) {
         setNotes(prevNotes => {
@@ -17,7 +17,7 @@ export default function App() {
     return (
         <main>
             <EditNotes handleNotesSubmit={handleNotesSubmit}/>
-            <ListNotes />
+            <ListNotes notes={notes} />
         </main>
     )
 }
