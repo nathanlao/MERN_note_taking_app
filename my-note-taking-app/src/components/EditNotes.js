@@ -26,6 +26,7 @@ export default function EditNotes(props) {
                 onChange={handleChange}
                 // Controlled component
                 value={note}
+                name={note}
                 />
             <button className="form-save-note">SAVE NOTE</button>
         </form>
