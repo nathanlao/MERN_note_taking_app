@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import EditNotes from "./components/EditNotes"
 import ListNotes from "./components/ListNotes"
 import swal from "sweetalert"
+import { nanoid } from "nanoid"
 
 export default function App() {
 
@@ -19,16 +20,26 @@ export default function App() {
                 button: "OK"
               });
         } else {
+            const newNoteObject = {
+                id: nanoid(),
+                body: newNote
+            }
             setNotes(prevNotes => {
-                return [...prevNotes, newNote]
+                return [...prevNotes, newNoteObject]
             })
         }
+    }
+
+    function handleViewNote(noteId) {
+        // Filter out the with the one note that user click (matched id)
+        const clickedNote = notes.filter((note) => note.id === noteId)
+        console.log(clickedNote[0].body)
     }
 
     return (
         <main>
             <EditNotes handleNotesSubmit={handleNotesSubmit}/>
-            <ListNotes notes={notes} />
+            <ListNotes notes={notes} handleViewNote={handleViewNote}/>
         </main>
     )
 }
