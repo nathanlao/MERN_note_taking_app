@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import EditNotes from "./components/EditNotes"
 import ListNotes from "./components/ListNotes"
+import swal from "sweetalert"
 
 export default function App() {
 
@@ -11,7 +12,12 @@ export default function App() {
     
     function handleNotesSubmit(newNote) {
         if (newNote === "") {
-            alert("Please type down your notes before saving...")
+            swal({
+                title: "Warning",
+                text: "Please type down your notes before saving...",
+                icon: "warning",
+                button: "OK"
+              });
         } else {
             setNotes(prevNotes => {
                 return [...prevNotes, newNote]
