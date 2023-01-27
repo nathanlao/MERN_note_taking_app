@@ -1,0 +1,63 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "roboto", sans-serif;
+    background-color: #adb5bd;
+}
+
+main {
+    border: 2px solid red;
+}
+
+.form-container,
+.section-container {
+    margin: 30px 100px 100px;
+}
+
+/* Form edit notes style */
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    border: 2px solid blue;
+}
+
+.form-textarea {
+    background-color: #f8f9fa;
+    padding: 15px;
+    resize: none;
+    border-radius: 3px;
+    width: 100%;
+    height: 250px;
+}
+
+.form-save-note {
+    font-size: 16px;
+    font-weight: 400;
+    color: #ffffff;
+    background-color: #4361ee;
+    border: none;
+    border-radius: 3px;
+    padding: 12px 10px;
+}
+
+/* section lists of notes style */
+
+.section-container {
+    border: 2px solid green;
+}
+
+.section-heading {
+    font-weight: 700;
+    margin: 0;
+}
+
+.section-list-notes {
+    margin: 10px 0;
+    padding: 0;
+    line-height: 25px;
+}
