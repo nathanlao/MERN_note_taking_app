@@ -9,9 +9,13 @@ export default function App() {
     // console.log(notes)
     
     function handleNotesSubmit(newNote) {
-        setNotes(prevNotes => {
-            return [...prevNotes, newNote]
-        })
+        if (newNote === "") {
+            alert("Please type down your notes before saving...")
+        } else {
+            setNotes(prevNotes => {
+                return [...prevNotes, newNote]
+            })
+        }
     }
 
     return (
