@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export default function EditNotes() {
+export default function EditNotes(props) {
 
     const [note, setNote] = useState("")
 
@@ -8,7 +8,7 @@ export default function EditNotes() {
         // Prevent the page refresh
         event.preventDefault()
         
-        console.log(note)
+        props.handleNotesSubmit(note)
 
         // Clear the textarea
         setNote("")
