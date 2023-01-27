@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import EditNotes from "./components/EditNotes"
 import ListNotes from "./components/ListNotes"
 import swal from "sweetalert"
+import { nanoid } from "nanoid"
 
 export default function App() {
 
@@ -19,8 +20,12 @@ export default function App() {
                 button: "OK"
               });
         } else {
+            const newNoteObject = {
+                id: nanoid(),
+                body: newNote
+            }
             setNotes(prevNotes => {
-                return [...prevNotes, newNote]
+                return [...prevNotes, newNoteObject]
             })
         }
     }
