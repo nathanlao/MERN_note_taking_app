@@ -1,19 +1,48 @@
-import React from "react"
+import React, { useState } from "react"
 
 export default function ListNotes(props) {
 
-    console.log(props.notes)
+    // console.log(props.notes)
+
+    const [showModal, setShowModal] = useState(false)
+    const [clickedNote, setClickedNote] = useState("")
+
+    function handleViewNote(noteId) {
+        // Filter out the with the one note that user click (matched id)
+        const clickedNote = props.notes.filter((note) => note.id === noteId)
+        setShowModal(true)
+        setClickedNote(clickedNote[0])
+    }
+
+    function closeModal() {
+        setShowModal(false)
+    }
 
     // Map over note element with <li> into component
     const noteElements = props.notes.map((note, index) => {
-        // split the note with \n and display the note's title onlt
+
         return  (
             <li key={note.id}>
-                <a href="/#" onClick={() => props.handleViewNote(note.id)}>
-                    {note.body.split("\n")[0]}</a>
+                <a href="/#" onClick={() => handleViewNote(note.id)}>
+                    {note.title}</a>
             </li>
         )
     })
+
+    let noteBodyElements
+    if (clickedNote) {
+        noteBodyElements = clickedNote.body.split("\n").map((line, index) => {
+            // Avoid user enter extra "\n"
+            if (line === "") {
+                return null;
+            }
+            return (
+                <li key={index}>
+                    {line}
+                </li>
+            )
+        })
+    }
 
     return (
         <section className="section-container">
@@ -21,6 +50,19 @@ export default function ListNotes(props) {
             <ul className="section-list-notes">
                 {noteElements}
             </ul>
+            {showModal && 
+                <div className="modal">
+                    <div className="modal-close-btn-container">
+                        <i className="modal-close fa-solid fa-circle-xmark fa-2xl" onClick={closeModal}></i>
+                    </div>
+                    <div className="modal-notes-container">
+                        <h1 className="modal-notes-title">{clickedNote.title}</h1>
+                        <ul className="modal-notes-body">
+                            {noteBodyElements}
+                        </ul>
+                    </div>
+                </div>
+            }
         </section>
     )
 }
