@@ -58,10 +58,16 @@ body {
 }
 
 .section-list-notes {
+    text-transform: uppercase;
     margin: 10px 0;
     padding: 0;
     line-height: 25px;
     letter-spacing: 0.5px;
+}
+
+.section-list-notes li::marker {
+    content: '☞ ';
+    font-size: 1.3em;
 }
 
 .section-list-notes a {
@@ -70,5 +76,60 @@ body {
 
 .section-list-notes a:hover,
 .section-list-notes a:active { 
+    color: #ffd166;
+}
+
+/* modal pop up */
+
+.modal {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: auto;
+
+    max-height: 40%;
+    max-width: 40%;
+    border-radius: 10px;
+    box-shadow: 0px 0px 6px 2px #1b263b;
+    background-color: #415a77;
+    color: #e0e1dd;
+}
+
+.modal-notes-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: start;
+    padding: 10px;
+}
+
+.modal-notes-title {
+    font-size: 30px;
+    font-weight: 700;
+    margin: 0 0 0 30px;
+    text-transform: uppercase;
+}
+
+.modal-notes-body {
+    margin: 10px 0;
+}
+
+.modal-notes-body li::marker {
+    content: '☞ ';
+    font-size: 1.3em;
+}
+
+.modal-close-btn-container {
+    text-align: right;
+    margin: 30px 30px 0 0;
+}
+
+.modal-close {
+    cursor: pointer;
+}
+
+.modal-close:hover {
     color: #ffd166;
 }

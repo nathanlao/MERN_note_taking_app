@@ -20,9 +20,26 @@ export default function App() {
                 button: "OK"
               });
         } else {
+
+            // split the newNote with title and body
+            const newLineIndex = newNote.indexOf("\n")
+            let title = ""
+            let body = ""
+
+            // if no newline found
+            if(newLineIndex === -1) {
+                title = newNote
+                body = ""
+            } else {
+                title = newNote.slice(0, newLineIndex)
+                body = newNote.slice(newLineIndex + 1)
+            }
+
+            // Give the newNote a nanoid
             const newNoteObject = {
                 id: nanoid(),
-                body: newNote
+                title: title,
+                body: body
             }
             setNotes(prevNotes => {
                 return [...prevNotes, newNoteObject]
@@ -30,16 +47,10 @@ export default function App() {
         }
     }
 
-    function handleViewNote(noteId) {
-        // Filter out the with the one note that user click (matched id)
-        const clickedNote = notes.filter((note) => note.id === noteId)
-        console.log(clickedNote[0].body)
-    }
-
     return (
         <main>
             <EditNotes handleNotesSubmit={handleNotesSubmit}/>
-            <ListNotes notes={notes} handleViewNote={handleViewNote}/>
+            <ListNotes notes={notes}/>
         </main>
     )
 }
