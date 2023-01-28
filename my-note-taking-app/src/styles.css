@@ -113,7 +113,8 @@ body {
 }
 
 .modal-notes-body {
-    margin: 10px 0;
+    margin: 20px 0;
+    line-height: 24px;
 }
 
 .modal-notes-body li::marker {
