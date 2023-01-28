@@ -53,7 +53,7 @@ export default function ListNotes(props) {
             <div className="modal-overlay">
                 <div className="modal">
                     <div className="modal-close-btn-container">
-                        <i className="modal-close fa-solid fa-circle-xmark fa-2xl" onClick={closeModal}></i>
+                        <i className="modal-close fa-solid fa-circle-xmark" onClick={closeModal}></i>
                     </div>
                     <div className="modal-notes-container">
                         <h1 className="modal-notes-title">{clickedNote.title}</h1>

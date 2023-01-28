@@ -22,7 +22,7 @@ export default function EditNotes(props) {
         <form className="form-container" onSubmit={handleSubmit}>
             <textarea 
                 className="form-textarea"
-                placeholder="Type your note's title here..."
+                placeholder="Title your note here and separate content with new line for clear organization..."
                 onChange={handleChange}
                 // Controlled component
                 value={note}

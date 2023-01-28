@@ -11,7 +11,7 @@ body {
 
 .form-container,
 .section-container {
-    margin: 30px 100px 100px;
+    margin: 1.875em 6.25em 6.25em;
 }
 
 /* Form edit notes style */
@@ -23,7 +23,7 @@ body {
 
 .form-textarea,
 .form-save-note {
-    font-size: 16px;
+    font-size: 1rem;
     border-radius: 3px;
     border: none;
     font-family: inherit;
@@ -32,7 +32,7 @@ body {
 
 .form-textarea {
     background-color: #f8f9fa;
-    padding: 16px;
+    padding: 1em;
     resize: none;
     width: 100%;
     height: 250px;
@@ -41,7 +41,7 @@ body {
 .form-save-note {
     color: #ffffff;
     background-color: #4361ee;
-    padding: 12px 10px;
+    padding: 0.75em 0.625em;
     cursor: pointer;
 }
 
@@ -59,15 +59,15 @@ body {
 
 .section-list-notes {
     text-transform: uppercase;
-    margin: 10px 0;
+    margin: 0.625em 0;
     padding: 0;
-    line-height: 25px;
+    line-height: 1.3;
     letter-spacing: 0.5px;
 }
 
 .section-list-notes li::marker {
     content: '☞ ';
-    font-size: 1.3em;
+    font-size: 1.3rem;
 }
 
 .section-list-notes a {
@@ -102,29 +102,30 @@ body {
     flex-direction: column;
     align-items: flex-start;
     justify-content: start;
-    padding: 10px;
+    margin: 0.625em 0 0 0.625em;
 }
 
 .modal-notes-title {
-    font-size: 30px;
+    font-size: 1.3rem;
     font-weight: 700;
-    margin: 0 0 0 30px;
+    margin: 0 0 0 1em;
     text-transform: uppercase;
 }
 
 .modal-notes-body {
-    margin: 20px 0;
-    line-height: 24px;
+    margin: 1.1em 0;
+    line-height: 1.4;
 }
 
 .modal-notes-body li::marker {
     content: '☞ ';
-    font-size: 1.3em;
+    font-size: 1.3rem;
 }
 
 .modal-close-btn-container {
     text-align: right;
-    margin: 30px 30px 0 0;
+    margin: 0.6em 0.8em 0 0;
+    font-size: 20px;
 }
 
 .modal-close {
@@ -146,4 +147,21 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+@media (min-width: 576px) {
+    
+    .modal-notes-title {
+        font-size: 1.875rem;
+    }
+
+    .modal-notes-body {
+        margin: 1.25em 0;
+        line-height: 1.4;
+    }
+
+    .modal-close-btn-container {
+        margin: 0.7em 0.9em 0 0;
+        font-size: 30px;
+    }
 }
