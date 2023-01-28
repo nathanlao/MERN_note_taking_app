@@ -1,15 +1,23 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import EditNotes from "./components/EditNotes"
 import ListNotes from "./components/ListNotes"
 import swal from "sweetalert"
 import { nanoid } from "nanoid"
 
 export default function App() {
+    // localStorage.clear()
+
+    // myNotes from localStorage
+    const myNotes = JSON.parse(localStorage.getItem("myNotes"))
 
     // Array of notes state
-    const [notes, setNotes] = useState([])
+    // Lazy state initializtion for notes state
+    const [notes, setNotes] = useState(() => myNotes || [])
 
-    // console.log(notes)
+    // Side effect for localStorage
+    useEffect(() => {
+        localStorage.setItem("myNotes", JSON.stringify(notes))
+    }, [notes])
     
     function handleNotesSubmit(newNote) {
         if (newNote.trim().length === 0) {
@@ -18,7 +26,7 @@ export default function App() {
                 text: "Please type down your notes before saving...",
                 icon: "warning",
                 button: "OK"
-              });
+            });
         } else {
 
             // split the newNote with title and body
