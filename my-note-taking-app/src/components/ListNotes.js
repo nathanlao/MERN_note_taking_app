@@ -2,8 +2,7 @@ import React, { useState } from "react"
 
 export default function ListNotes(props) {
 
-    // console.log(props.notes)
-
+    // Keep track of modal state and user clicked note state
     const [showModal, setShowModal] = useState(false)
     const [clickedNote, setClickedNote] = useState("")
 
@@ -51,6 +50,7 @@ export default function ListNotes(props) {
                 {noteElements}
             </ul>
             {showModal && 
+            <div className="modal-overlay">
                 <div className="modal">
                     <div className="modal-close-btn-container">
                         <i className="modal-close fa-solid fa-circle-xmark fa-2xl" onClick={closeModal}></i>
@@ -62,6 +62,7 @@ export default function ListNotes(props) {
                         </ul>
                     </div>
                 </div>
+            </div>
             }
         </section>
     )
