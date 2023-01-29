@@ -6,7 +6,9 @@ export default function ListNotes(props) {
     const [showModal, setShowModal] = useState(false)
     const [clickedNote, setClickedNote] = useState("")
 
-    function handleViewNote(noteId) {
+    function handleViewNote(event, noteId) {
+
+        event.preventDefault()
         // Filter out the with the one note that user click (matched id)
         const clickedNote = props.notes.filter((note) => note.id === noteId)
         setShowModal(true)
@@ -22,7 +24,7 @@ export default function ListNotes(props) {
 
         return  (
             <li key={note.id}>
-                <a href="/#" onClick={() => handleViewNote(note.id)}>
+                <a href={`/notes/${note.id}`} onClick={(event) => handleViewNote(event, note.id)}>
                     {note.title}</a>
             </li>
         )
