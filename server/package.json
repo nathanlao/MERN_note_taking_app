@@ -1,0 +1,11 @@
+{
+  "name": "note-taking-server",
+  "version": "1.0.0",
+  "description": "This is a server for note taking app, which will be capable of providing CRUD operations and interface with databse",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "nathan",
+  "license": "ISC"
+}
