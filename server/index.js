@@ -80,6 +80,37 @@ app.post('/notes', async (req, res) => {
     }
 })
 
+// PUT (update) a note by id
+app.put('/notes/:id', async (req, res) => {
+    const id = req.params.id
+    const { title, body, priority, color } = req.body
+
+    try {
+        const note = await Note.findById(id)
+        if (note === null) {
+            res.status(404).send("Note not found!")
+        } else {
+            const updatedNote = await Note.updateOne(
+                { _id: id },
+                { $set: {
+                    "title": title, 
+                    "body": body, 
+                    "priority": priority, 
+                    "color": color,
+                    "timeLastModified": Date.now()
+                    }
+                }, 
+                {upsert: true}
+            )
+            console.log('Note updated in db!')
+            res.json(updatedNote)
+        }
+    } catch (err) {
+        console.log(err)
+        res.status(500).json({ message: err.message })
+    }
+})
+
 // DELETE a note by id
 app.delete('/notes/:id', async (req, res) => {
     const id = req.params.id
