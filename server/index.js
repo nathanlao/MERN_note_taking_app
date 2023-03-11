@@ -43,6 +43,24 @@ app.get('/notes', async (req, res) => {
     }
 })
 
+// GET a note by id
+app.get('/notes/:id', async (req, res) => {
+    const id = req.params.id
+    // console.log(id)
+    try {
+        const note = await Note.findById(id)
+        if (note === null) {
+            res.status(404).send("Note not found!")
+        } else {
+            console.log('Note fetched from db!')
+            res.json(note)
+        }
+    } catch (err) {
+        console.log(err)
+        res.status(500).json({ message: err.message })
+    }
+})
+
 // POST a new note
 app.post('/notes', async (req, res) => {
     try {
