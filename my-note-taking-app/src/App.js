@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react"
-import EditNotes from "./components/EditNotes"
-import ListNotes from "./components/ListNotes"
+import EditNotes from "./pages/EditNotes"
+import ListNotes from "./pages/ListNotes"
+import { Routes, Route } from "react-router-dom"
+import Layout from "./components/Layout"
 
 export default function App() {
     // localStorage.clear()
@@ -19,8 +21,11 @@ export default function App() {
     
     return (
         <main>
-            <EditNotes setNotes={setNotes}/>
-            <ListNotes notes={notes}/>
+            <Routes>
+                <Route path="/notes" element={<Layout setNotes={setNotes}/>}>
+                    <Route index element={<ListNotes notes={notes}/>} />  
+                </Route>
+            </Routes>
         </main>
     )
 }
