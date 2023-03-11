@@ -3,6 +3,9 @@ const express = require('express')
 const app = express()
 const mongoose = require('mongoose')
 
+// Mongoose model: Notes
+const Notes = require('./NotesModel')
+
 const port = process.env.PORT || 8080
 
 // Connect to MongoDB cmpt372asn3 database
@@ -17,6 +20,24 @@ db.on('error', console.error.bind(console, "MongoDB connection error: "))
 db.once('open', () => {
     console.log("MongoDB connected!")
 })
+
+// var createNote = async() => {
+//     var newNote = new Notes({
+//         title: "Hello World2",
+//         body: "This is a test note2",
+//         priority: 1,
+//         color: "red",
+//     })
+
+//     try {
+//         await newNote.save()
+//         console.log('New note saved to db!')
+//     } catch (e) {
+//         console.log(e.errors)
+//     }
+//     process.exit()
+// }
+// createNote()
 
 
 // Parse incoming requests data
