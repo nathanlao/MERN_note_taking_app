@@ -80,6 +80,24 @@ app.post('/notes', async (req, res) => {
     }
 })
 
+// DELETE a note by id
+app.delete('/notes/:id', async (req, res) => {
+    const id = req.params.id
+    try {
+        const note = await Note.findById(id)
+        if (note === null) {
+            res.status(404).send("Note not found!")
+        } else {
+            const deletedNote = await Note.deleteOne({ _id: id })
+            console.log('Note deleted from db!')
+            res.json(deletedNote)
+        }
+    } catch (err) {
+        console.log(err)
+        res.status(500).json({ message: err.message })
+    }
+})
+
 app.listen(port, () => {
     console.log(`App is running on port: ${port}`)
 })
