@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react"
-import EditNotes from "./pages/EditNotes"
 import ListNotes from "./pages/ListNotes"
 import { Routes, Route } from "react-router-dom"
 import Layout from "./components/Layout"
