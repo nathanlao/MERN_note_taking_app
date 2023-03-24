@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 
-export default function ListNotes(props) {
+export default function ListNotes({ notes }) {
 
     // Keep track of modal state and user clicked note state
     const [showModal, setShowModal] = useState(false)
@@ -10,7 +10,7 @@ export default function ListNotes(props) {
 
         event.preventDefault()
         // Filter out the with the one note that user click (matched id)
-        const clickedNote = props.notes.filter((note) => note.id === noteId)
+        const clickedNote = notes.filter((note) => note.id === noteId)
         setShowModal(true)
         setClickedNote(clickedNote[0])
     }
@@ -20,11 +20,10 @@ export default function ListNotes(props) {
     }
 
     // Map over note element with <li> into component
-    const noteElements = props.notes.map((note, index) => {
-
+    const noteElements = notes.map((note, index) => {
         return  (
-            <li key={note.id}>
-                <a href={`/notes/${note.id}`} onClick={(event) => handleViewNote(event, note.id)}>
+            <li key={note._id}>
+                <a href={`/notes/${note._id}`} onClick={(event) => handleViewNote(event, note.id)}>
                     {note.title}</a>
             </li>
         )

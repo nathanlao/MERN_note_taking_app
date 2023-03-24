@@ -20,7 +20,7 @@ export default function App() {
      * }, [notes]
      * 
      */
-    
+
     const [notes, setNotes] = useState([])
     const [error, setError] = useState(null)
 
@@ -37,7 +37,7 @@ export default function App() {
                     }
                 }
                 const data = response.data
-                console.log(data)
+                setNotes(data)
             } catch (err) {
                 setError(err)
                 console.log(err)
