@@ -6,23 +6,6 @@ import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined
 
 export default function ListNotes({ notes }) {
 
-    // Keep track of modal state and user clicked note state
-    const [showModal, setShowModal] = useState(false)
-    const [clickedNote, setClickedNote] = useState("")
-
-    function handleViewNote(event, noteId) {
-
-        event.preventDefault()
-        // Filter out the with the one note that user click (matched id)
-        const clickedNote = notes.filter((note) => note.id === noteId)
-        setShowModal(true)
-        setClickedNote(clickedNote[0])
-    }
-
-    function closeModal() {
-        setShowModal(false)
-    }
-
     // Map over note element with <li> into component
     const noteElements = notes.map((note, index) => {
         return  (
@@ -36,29 +19,12 @@ export default function ListNotes({ notes }) {
                 <ListItemIcon>
                     <EventNoteOutlinedIcon />
                 </ListItemIcon>
-                <Link to={`/${note._id}`}>
+                <Link to={`/${note._id}`} >
                     <ListItemText primary={note.title} sx={{ marginLeft: -2 }}/>
                 </Link>
-                {/* <a href={`/notes/${note._id}`} onClick={(event) => handleViewNote(event, note.id)}>
-                    {note.title}</a> */}
             </ListItem>
         )
     })
-
-    let noteBodyElements
-    if (clickedNote) {
-        noteBodyElements = clickedNote.body.split("\n").map((line, index) => {
-            // Avoid user enter extra "\n"
-            if (line === "") {
-                return null;
-            }
-            return (
-                <li key={index}>
-                    {line}
-                </li>
-            )
-        })
-    }
 
     return (
         <section className="section-container">
@@ -70,21 +36,6 @@ export default function ListNotes({ notes }) {
                     </Grid>
                 </Grid>
             </Grid>
-            {showModal && 
-            <div className="modal-overlay">
-                <div className="modal">
-                    <div className="modal-close-btn-container">
-                        <i className="modal-close fa-solid fa-circle-xmark" onClick={closeModal}></i>
-                    </div>
-                    <div className="modal-notes-container">
-                        <h1 className="modal-notes-title">{clickedNote.title}</h1>
-                        <ul className="modal-notes-body">
-                            {noteBodyElements}
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            }
         </section>
     )
 }
