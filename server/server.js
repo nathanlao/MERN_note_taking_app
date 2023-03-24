@@ -3,6 +3,7 @@ const express = require('express')
 const app = express()
 const mongoose = require('mongoose')
 const notesRoute = require('./routes/notesRoute')
+const cors = require('cors')
 const dotenv = require('dotenv')
 dotenv.config()
 
@@ -22,6 +23,8 @@ db.once('open', () => {
     console.log("MongoDB connected!")
 })
 
+app.use(cors())
+
 // Parse incoming requests data
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
@@ -32,8 +35,8 @@ app.use('/', (req, res, next) => {
     next()
 })
 
-app.use('/', notesRoute)
+app.use('/api', notesRoute)
 
 app.listen(port, () => {
-    console.log(`App is running on port: ${port}`)
+    console.log(`Server is running on port: ${port}`)
 })
