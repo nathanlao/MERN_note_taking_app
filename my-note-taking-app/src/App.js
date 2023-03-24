@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react"
-import ListNotes from "./pages/ListNotes"
-import { Routes, Route, useParams } from "react-router-dom"
+import { Routes, Route } from "react-router-dom"
 import Layout from "./components/Layout"
 import NotesLayout from "./components/NotesLayout"
+import NoteDetails from "./pages/NoteDetails"
 import axios from "axios"
 
 export default function App() {
@@ -56,7 +56,7 @@ export default function App() {
             <Routes>
                 <Route path="/" element={<Layout setNotes={setNotes}/>}>
                     <Route path="/" element={<NotesLayout notes={notes}/>} > 
-                        <Route path=":id" element={<h1>Modal will be here with your notes id </h1>} />  
+                        <Route path=":id" element={<NoteDetails />} />  
                     </Route>
                 </Route>
             </Routes>
