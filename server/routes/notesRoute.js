@@ -12,7 +12,7 @@ router.get('/notes', async (req, res) => {
     try {
         const notes = await Note.find()
         console.log('Notes fetched from db!')
-        res.json(notes)
+        res.status(200).json(notes)
     } catch (err) {
         console.log(err)
         res.status(500).json({ message: err.message })
@@ -29,7 +29,7 @@ router.get('/notes/:id', async (req, res) => {
             res.status(404).send("Note not found!")
         } else {
             console.log('Note fetched from db!')
-            res.json(note)
+            res.status(200).json(note)
         }
     } catch (err) {
         console.log(err)
@@ -49,7 +49,7 @@ router.post('/notes', async (req, res) => {
         }) 
         const newNote = await newNoteObj.save()
         console.log('New note saved to db!')
-        res.json(newNote)
+        res.status(200).json(newNote)
     } catch (err) {
         console.log(err)
         res.status(500).json({ message: err.message })
@@ -79,7 +79,7 @@ router.put('/notes/:id', async (req, res) => {
                 {upsert: true}
             )
             console.log('Note updated in db!')
-            res.json(updatedNote)
+            res.status(200).json(updatedNote)
         }
     } catch (err) {
         console.log(err)

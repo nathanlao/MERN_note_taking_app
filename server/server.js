@@ -32,8 +32,8 @@ app.use('/', (req, res, next) => {
     next()
 })
 
-app.use('/', notesRoute)
+app.use('/api', notesRoute)
 
 app.listen(port, () => {
-    console.log(`App is running on port: ${port}`)
+    console.log(`Server is running on port: ${port}`)
 })
