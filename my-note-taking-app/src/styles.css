@@ -72,4 +72,14 @@ body {
     color: #ffd166;
 }
 
+/* Dialog */
 
+.dialog-title{
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.dialog-close-btn {
+    text-decoration: none;
+}
