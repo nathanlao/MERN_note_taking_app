@@ -23,10 +23,6 @@ const NoteSchema = new Schema({
         type: String,
         default: "white"
     },
-    priority: {
-        type: Number,
-        default: 0
-    }
 })
 
 module.exports = mongoose.model('Notes', NoteSchema)
