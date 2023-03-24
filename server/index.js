@@ -3,13 +3,16 @@ const express = require('express')
 const app = express()
 const mongoose = require('mongoose')
 const notesRoute = require('./routes/notesRoute')
+const dotenv = require('dotenv')
+dotenv.config()
 
 const port = process.env.PORT || 8080
 
 // Connect to MongoDB cmpt372asn3 database
-const password = process.env.PWD
+const username = process.env.MONGOOSE_USER
+const password = process.env.MONGOOSE_PWD
 mongoose.connect(
-    `mongodb+srv://gla93:${password}@cluster0.vmsvedd.mongodb.net/cmpt372asn3?retryWrites=true&w=majority`
+    `mongodb+srv://${username}:${password}@cluster0.vmsvedd.mongodb.net/cmpt372asn3?retryWrites=true&w=majority`
 )
 
 // Check connection
