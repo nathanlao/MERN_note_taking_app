@@ -7,9 +7,7 @@ import moment from "moment"
 
 export default function ListNotes({ notes }) {
 
-    console.log(notes)
-
-    // Map over note element with <li> into component
+    // Map over note element with List into component
     const noteElements = notes.map((note) => {
         return  (
             <List key={note._id} >
