@@ -1,8 +1,8 @@
 import React, { useState } from "react"
 import { Link } from "react-router-dom"
 import { Grid, Typography, ListItem, ListItemText, ListItemIcon, IconButton } from "@mui/material"
-import TextSnippetIcon from '@mui/icons-material/TextSnippet';
-import DeleteIcon from '@mui/icons-material/Delete';
+import EventNoteOutlinedIcon from '@mui/icons-material/EventNoteOutlined';
+import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined';
 
 export default function ListNotes({ notes }) {
 
@@ -28,15 +28,16 @@ export default function ListNotes({ notes }) {
         return  (
             <ListItem key={note._id} secondaryAction={
                     <IconButton edge="end" aria-label="delete">
-                        <DeleteIcon />
+                        <DeleteForeverOutlinedIcon />
                     </IconButton>
                 }
+                sx={{ py: 0.5 }}
             >
                 <ListItemIcon>
-                    <TextSnippetIcon />
+                    <EventNoteOutlinedIcon />
                 </ListItemIcon>
                 <Link to={`/${note._id}`}>
-                    <ListItemText primary={note.title}/>
+                    <ListItemText primary={note.title} sx={{ marginLeft: -2 }}/>
                 </Link>
                 {/* <a href={`/notes/${note._id}`} onClick={(event) => handleViewNote(event, note.id)}>
                     {note.title}</a> */}
