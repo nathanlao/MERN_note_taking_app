@@ -23,14 +23,24 @@ body {
 
 .form-textarea,
 .form-save-note {
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, .3);
     font-size: 1rem;
-    border-radius: 3px;
     border: none;
     font-family: inherit;
     letter-spacing: 0.5px;
 }
 
+.form-textarea:first-of-type {
+    border-radius: 6px 6px 0px 0px;
+}
+
+.form-save-note:last-of-type {
+    border-radius: 0px 0px 6px 6px;
+    border-top: none;
+}
+
 .form-textarea {
+    outline: none;
     background-color: #f8f9fa;
     padding: 1em;
     resize: none;
