@@ -1,4 +1,8 @@
 import React, { useState } from "react"
+import { Link } from "react-router-dom"
+import { Grid, Typography, ListItem, ListItemText, ListItemIcon, IconButton } from "@mui/material"
+import TextSnippetIcon from '@mui/icons-material/TextSnippet';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 export default function ListNotes({ notes }) {
 
@@ -22,10 +26,21 @@ export default function ListNotes({ notes }) {
     // Map over note element with <li> into component
     const noteElements = notes.map((note, index) => {
         return  (
-            <li key={note._id}>
-                <a href={`/notes/${note._id}`} onClick={(event) => handleViewNote(event, note.id)}>
-                    {note.title}</a>
-            </li>
+            <ListItem key={note._id} secondaryAction={
+                    <IconButton edge="end" aria-label="delete">
+                        <DeleteIcon />
+                    </IconButton>
+                }
+            >
+                <ListItemIcon>
+                    <TextSnippetIcon />
+                </ListItemIcon>
+                <Link to={`/${note._id}`}>
+                    <ListItemText primary={note.title}/>
+                </Link>
+                {/* <a href={`/notes/${note._id}`} onClick={(event) => handleViewNote(event, note.id)}>
+                    {note.title}</a> */}
+            </ListItem>
         )
     })
 
@@ -46,10 +61,14 @@ export default function ListNotes({ notes }) {
 
     return (
         <section className="section-container">
-            <h1 className="section-heading">SAVED NOTES:</h1> 
-            <ul className="section-list-notes">
-                {noteElements}
-            </ul>
+            <Typography sx={{ mt: 4, mb: 4 }} variant="h5" component="div">SAVED NOTES:</Typography> 
+            <Grid container spacing={2}>
+                <Grid item xs={6} md={4}>
+                    <Grid container spacing={2} direction="column">
+                        {noteElements}
+                    </Grid>
+                </Grid>
+            </Grid>
             {showModal && 
             <div className="modal-overlay">
                 <div className="modal">

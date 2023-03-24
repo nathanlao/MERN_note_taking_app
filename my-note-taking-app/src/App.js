@@ -36,6 +36,7 @@ export default function App() {
                         status: response.status
                     }
                 }
+                console.log("Fetching notes from db")
                 const data = response.data
                 setNotes(data)
             } catch (err) {
@@ -53,7 +54,7 @@ export default function App() {
     return (
         <main>
             <Routes>
-                <Route path="/notes" element={<Layout setNotes={setNotes}/>}>
+                <Route path="/" element={<Layout setNotes={setNotes}/>}>
                     <Route index element={<ListNotes notes={notes}/>} />  
                 </Route>
             </Routes>

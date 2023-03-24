@@ -52,30 +52,13 @@ body {
 
 /* section lists of notes style */
 
-.section-heading {
-    font-weight: 400;
-    margin: 0;
+.section-container a {
+    text-decoration: none;
+    color:#4361ee;
 }
 
-.section-list-notes {
-    text-transform: uppercase;
-    margin: 0.625em 0;
-    padding: 0;
-    line-height: 1.3;
-    letter-spacing: 0.5px;
-}
-
-.section-list-notes li::marker {
-    content: '☞ ';
-    font-size: 1.3rem;
-}
-
-.section-list-notes a {
-    color: #4361ee;
-}
-
-.section-list-notes a:hover,
-.section-list-notes a:active { 
+.section-container a:hover, 
+.section-container a:active {
     color: #ffd166;
 }
 
