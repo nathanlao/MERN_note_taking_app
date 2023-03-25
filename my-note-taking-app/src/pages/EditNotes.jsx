@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import swal from "sweetalert"
-import { TextField, Button, FormControl, InputLabel, Select, MenuItem } from "@mui/material";
+import { TextField, Button, MenuItem } from "@mui/material";
+import axios from "axios";
 import { nanoid } from "nanoid"
 
 export default function EditNotes({ setNotes }) {
@@ -22,41 +23,40 @@ export default function EditNotes({ setNotes }) {
 
         console.log(title, body, color)
         
-        // if (note.trim().length === 0) {
-        //     swal({
-        //         title: "Warning",
-        //         text: "Please type down your notes before saving...",
-        //         icon: "warning",
-        //         button: "OK"
-        //     });
-        // } else {
+        if (!title || !body || !color) {
+            swal({
+                title: "Warning",
+                text: "Please type down your notes before saving...",
+                icon: "warning",
+                button: "OK"
+            });
+        } else {
 
-        //     // split the newNote with title and body
-        //     const newLineIndex = note.indexOf("\n")
-        //     let title = ""
-        //     let body = ""
+            async function saveNewNote() {
+                try {
+                    const newNote = {
+                        id: nanoid(),
+                        title: title,
+                        body: body,
+                        color: color
+                    }
 
-        //     // if no newline found
-        //     if(newLineIndex === -1) {
-        //         title = note
-        //         body = ""
-        //     } else {
-        //         title = note.slice(0, newLineIndex)
-        //         body = note.slice(newLineIndex + 1)
-        //     }
+                    const response = await axios.post("http://localhost:3001/api/notes", newNote)
+                    const data = response.data
 
-        //     // Give the newNote a nanoid
-        //     const newNoteObject = {
-        //         id: nanoid(),
-        //         title: title,
-        //         body: body
-        //     }
-        //     setNotes(prevNotes => {
-        //         return [...prevNotes, newNoteObject]
-        //     })
-        // }
+                    setNotes(prevNotes => {
+                        return [...prevNotes, newNote]
+                    })
 
-        // // Clear the textarea
+                } catch (err) {
+                    console.log(err)
+                }
+            }
+            saveNewNote()
+
+        }
+
+        // Clear the textarea
         // setNote("")
     }
 
