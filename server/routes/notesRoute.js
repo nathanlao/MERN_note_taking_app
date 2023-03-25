@@ -22,9 +22,9 @@ router.get('/notes', async (req, res) => {
 // GET a note by id
 router.get('/notes/:id', async (req, res) => {
     const id = req.params.id
-    // console.log(id)
+
     try {
-        const note = await Note.findById(id)
+        const note = await Note.find({ id: id })
         if (note === null) {
             res.status(404).send("Note not found!")
         } else {
@@ -40,12 +40,20 @@ router.get('/notes/:id', async (req, res) => {
 // POST a new note
 router.post('/notes', async (req, res) => {
     try {
-        const { title, body, color } = req.body
+        const { id, title, body, color } = req.body
         const newNoteObj  = new Note({
+            id: id,
             title: title,
             body: body,
             color: color
         }) 
+        
+        if (!title) {
+            throw {
+                message: "Title required"
+            }
+        }
+
         const newNote = await newNoteObj.save()
         console.log('New note saved to db!')
         res.status(200).json(newNote)
@@ -61,12 +69,12 @@ router.put('/notes/:id', async (req, res) => {
     const { title, body, color } = req.body
 
     try {
-        const note = await Note.findById(id)
+        const note = await Note.find({ id: id })
         if (note === null) {
             res.status(404).send("Note not found!")
         } else {
             const updatedNote = await Note.updateOne(
-                { _id: id },
+                { id: id },
                 { $set: {
                     "title": title, 
                     "body": body, 
@@ -89,11 +97,11 @@ router.put('/notes/:id', async (req, res) => {
 router.delete('/notes/:id', async (req, res) => {
     const id = req.params.id
     try {
-        const note = await Note.findById(id)
+        const note = await Note.find({ id: id })
         if (note === null) {
             res.status(404).send("Note not found!")
         } else {
-            const deletedNote = await Note.deleteOne({ _id: id })
+            const deletedNote = await Note.deleteOne({ id: id })
             console.log('Note deleted from db!')
             res.json(deletedNote)
         }

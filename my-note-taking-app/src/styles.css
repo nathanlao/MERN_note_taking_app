@@ -24,11 +24,9 @@ body {
 }
 
 .form-save-note {
-    box-shadow: 4px 4px 4px rgba(0, 0, 0, .3);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, .3) !important;
     font-size: 1rem;
-    border: none;
-    font-family: inherit;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.5px !important;
 }
 
 .form-save-note:last-of-type {
@@ -38,13 +36,11 @@ body {
 
 .form-save-note {
     color: #ffffff;
-    background-color: #4361ee;
-    padding: 0.75em 0.625em;
-    cursor: pointer;
+    background-color: #4361ee !important;
 }
 
 .form-save-note:hover {
-    background-color: #ffd166;
+    background-color: #ffd166 !important;
     color: #001d3d;
 }
 
