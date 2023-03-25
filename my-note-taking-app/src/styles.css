@@ -20,7 +20,7 @@ body {
 .list-notes-container {
     display: flex;
     flex-direction: column;
-    max-width: 650px;
+    max-width: 1000px;
 }
 
 .form-save-note {
