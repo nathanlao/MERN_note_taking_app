@@ -39,7 +39,8 @@ body {
     background-color: #4361ee !important;
 }
 
-.form-save-note:hover {
+.form-save-note:hover,
+.form-cancel-btn:hover {
     background-color: #ffd166 !important;
     color: #001d3d;
 }
@@ -72,9 +73,15 @@ body {
 .dialog-title{
     display: flex;
     justify-content: space-between;
-    align-items: baseline;
+    align-items: center;
 }
 
 .dialog-close-btn {
     text-decoration: none;
+}
+
+.dialog-edit {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
