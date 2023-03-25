@@ -11,6 +11,7 @@ export default function EditNotes({ setNotes }) {
     const isEditing = location.state !== null
     // Link state: note attributes from note details
     const noteId = location?.state?.id
+    const noteTimeCreated = location?.state?.timeCreated
     const noteTitle = location?.state?.title
     const noteBody = location?.state?.body
     const noteColor = location?.state?.color
@@ -99,7 +100,9 @@ export default function EditNotes({ setNotes }) {
                         id: noteId,
                         title: title,
                         body: body,
-                        color: color
+                        color: color,
+                        timeCreated: noteTimeCreated,
+                        timeLastModified: Date.now()
                     }
                     const response = await axios.put(`http://localhost:3001/api/notes/${noteId}`, updatedNote)
                     const data = response.data
