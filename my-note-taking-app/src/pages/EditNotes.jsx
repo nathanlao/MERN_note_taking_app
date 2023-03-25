@@ -1,10 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import swal from "sweetalert"
 import { TextField, Button, MenuItem } from "@mui/material";
 import axios from "axios";
 import { nanoid } from "nanoid"
+import { useLocation, useHistory } from "react-router-dom";
 
 export default function EditNotes({ setNotes }) {
+
+    const location = useLocation()
+    const isEditing = location.state !== null
+    // Link state: note attributes from note details
+    const noteTitle = location?.state?.title
+    const noteBody = location?.state?.body
+    const noteColor = location?.state?.color
+
+    // access to the history instance that use to navigate
+    const history = useHistory()
 
     const colors = [
         { label: "White", value: "#ffffff" },
@@ -12,12 +23,24 @@ export default function EditNotes({ setNotes }) {
         { label: "Baby Blue", value: "#ade8f4" },
         { label: "Mustard yellow", value: "#e9c46a" },
         { label: "Pale green", value: "#cbdfbd" },
-        { label: "Lavender blue", value: "#9c89b8" },
+        { label: "Lavender purple", value: "#9c89b8" },
     ];
 
     const [title, setTitle] = useState("")
     const [body, setBody] = useState("")
     const [color, setColor] = useState("")
+
+    useEffect(() => {
+        if (isEditing) {
+            setTitle(noteTitle)
+            setBody(noteBody)
+            setColor(noteColor)
+        } else {
+            setTitle("")
+            setBody("")
+            setColor("")
+        }
+    }, [isEditing, noteTitle, noteBody, noteColor])
 
     function handleSubmit(event) {
         // Prevent the page refresh
@@ -77,7 +100,7 @@ export default function EditNotes({ setNotes }) {
     }
 
     const selectColorEl = colors.map((color) => (
-        <MenuItem key={color.value} value={color.value}>
+        <MenuItem key={color.value} value={color.value} style={{ backgroundColor: color.value }}>
             {color.label}
         </MenuItem>
     ))
@@ -86,7 +109,7 @@ export default function EditNotes({ setNotes }) {
         <form className="form-container" onSubmit={handleSubmit}>
             <TextField 
                 style={{backgroundColor: "white", borderRadius: '6px 6px 0px 0px'}}
-                label="Title"
+                label={isEditing ? "Editing Title" : "Title"}
                 variant="filled"
                 // Controlled component (controlled by react state)
                 value={title}
@@ -94,7 +117,7 @@ export default function EditNotes({ setNotes }) {
             />
             <TextField
                 style={{backgroundColor: "white"}}
-                label="Body"
+                label={isEditing ? "Editing Body" : "Body"}
                 variant="filled"
                 multiline
                 rows={5}
@@ -105,18 +128,28 @@ export default function EditNotes({ setNotes }) {
                 select
                 variant="filled"
                 style={{backgroundColor: "white"}}
-                label="Color"
+                label={isEditing ? "Editing Color" : "Color"}
                 value={color}
                 onChange={handleColorChange}
             >
                 {selectColorEl}
             </TextField>
+            {isEditing ? (
+                <Button 
+                    style={{borderRadius: '0px'}}
+                    className="form-cancel-btn"
+                    color="error"
+                    variant="contained"
+                >
+                    Cancel Editing
+                </Button>
+            ) : null}
             <Button 
                 className="form-save-note" 
                 type="submit" 
                 variant="contained"
             >
-                SAVE NOTE
+                {isEditing ? "SAVE EDITED NOTE" : "CREATE NEW NOTE"}
             </Button>
         </form>
     )

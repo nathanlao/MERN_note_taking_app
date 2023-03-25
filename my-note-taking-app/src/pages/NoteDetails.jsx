@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { ListItem, ListItemText, ListItemIcon, Divider, 
-    Dialog, DialogContent, DialogTitle, DialogActions, Button, Typography } from "@mui/material";
+    Dialog, DialogContent, DialogTitle, DialogActions, Button, Typography, IconButton } from "@mui/material";
 import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
+import DriveFileRenameOutlineOutlinedIcon from '@mui/icons-material/DriveFileRenameOutlineOutlined';
 import moment from "moment"
 import axios from "axios";
 
@@ -10,7 +11,6 @@ export default function NoteDetails() {
     // Open the modal depends on id on the path
     const [open, setOpen] = useState(false)
     const [noteDetail, setNoteDetail] = useState([])
-    const [loading, setLoading] = useState(false)
     const [error, setError] = useState(null)
     const { id } = useParams()
 
@@ -21,7 +21,6 @@ export default function NoteDetails() {
 
         if (open) {
             async function getNoteDetails() {
-                setLoading(true)
                 try {
                     const response = await axios.get(`http://localhost:3001/api/notes/${id}`)
                     if (response.status !== 200) {
@@ -38,8 +37,6 @@ export default function NoteDetails() {
                 } catch (err) {
                     setError(err)
                     console.log(err)
-                } finally {
-                    setLoading(false)
                 }
             }
             getNoteDetails()
@@ -100,7 +97,21 @@ export default function NoteDetails() {
                     <Typography variant="h5" component="div">
                         {noteDetail.title}
                     </Typography>
-                    <Typography variant="body2">Last Modified: {moment(noteDetail.timeLastModified).startOf('ss').fromNow() }</Typography>
+                    <Typography variant="body2" className="dialog-edit">
+                        Last Modified: {moment(noteDetail.timeLastModified).startOf('ss').fromNow() }
+                        <Link to="/" state={
+                            {
+                                id: noteDetail.id,
+                                title: noteDetail.title,
+                                body: noteDetail.body,
+                                color: noteDetail.color
+                            }
+                        }>
+                            <IconButton>
+                                <DriveFileRenameOutlineOutlinedIcon />
+                            </IconButton>
+                        </Link>
+                    </Typography>
                 </DialogTitle>
                 <Divider />
                 <DialogContent style={{ width: '500px', height: '300px' }}>
