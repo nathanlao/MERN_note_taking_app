@@ -3,7 +3,7 @@ import swal from "sweetalert"
 import { TextField, Button, MenuItem } from "@mui/material";
 import axios from "axios";
 import { nanoid } from "nanoid"
-import { useLocation, useHistory } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export default function EditNotes({ setNotes }) {
 
@@ -14,8 +14,8 @@ export default function EditNotes({ setNotes }) {
     const noteBody = location?.state?.body
     const noteColor = location?.state?.color
 
-    // access to the history instance that use to navigate
-    const history = useHistory()
+    // navigate programmatically
+    const navigate = useNavigate()
 
     const colors = [
         { label: "White", value: "#ffffff" },
@@ -41,6 +41,13 @@ export default function EditNotes({ setNotes }) {
             setColor("")
         }
     }, [isEditing, noteTitle, noteBody, noteColor])
+
+    function handleCancelEditing() {
+        setTitle("")
+        setBody("")
+        setColor("")
+        navigate("/", {replace: true})
+    }
 
     function handleSubmit(event) {
         // Prevent the page refresh
@@ -140,6 +147,7 @@ export default function EditNotes({ setNotes }) {
                     className="form-cancel-btn"
                     color="error"
                     variant="contained"
+                    onClick={handleCancelEditing}
                 >
                     Cancel Editing
                 </Button>
