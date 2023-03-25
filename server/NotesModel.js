@@ -13,7 +13,6 @@ const NoteSchema = new Schema({
     },
     body: {
         type: String,
-        required: true
     },
     timeLastModified: {
         type: Date,

@@ -48,9 +48,9 @@ router.post('/notes', async (req, res) => {
             color: color
         }) 
         
-        if (!title || !body) {
+        if (!title) {
             throw {
-                message: "Title or body required"
+                message: "Title required"
             }
         }
 

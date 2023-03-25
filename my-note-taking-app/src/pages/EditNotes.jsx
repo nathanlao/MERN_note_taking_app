@@ -7,10 +7,12 @@ import { nanoid } from "nanoid"
 export default function EditNotes({ setNotes }) {
 
     const colors = [
-        { label: "White", value: "white" },
-        { label: "Blue", value: "blue" },
-        { label: "Green", value: "green" },
-        { label: "Yellow", value: "yellow" },
+        { label: "White", value: "#ffffff" },
+        { label: "Pale Pink", value: "#f5cac3" },
+        { label: "Baby Blue", value: "#ade8f4" },
+        { label: "Mustard yellow", value: "#e9c46a" },
+        { label: "Pale green", value: "#cbdfbd" },
+        { label: "Lavender blue", value: "#9c89b8" },
     ];
 
     const [title, setTitle] = useState("")
@@ -20,10 +22,8 @@ export default function EditNotes({ setNotes }) {
     function handleSubmit(event) {
         // Prevent the page refresh
         event.preventDefault()
-
-        console.log(title, body, color)
         
-        if (!title || !body || !color) {
+        if (!title) {
             swal({
                 title: "Warning",
                 text: "Please type down your notes before saving...",
@@ -53,11 +53,12 @@ export default function EditNotes({ setNotes }) {
                 }
             }
             saveNewNote()
-
         }
 
-        // Clear the textarea
-        // setNote("")
+        // Clear the textfield
+        setTitle("")
+        setBody("")
+        setColor("")
     }
 
     function handleTitleChange(event) {
