@@ -94,7 +94,11 @@ export default function NoteDetails() {
                 }}
             >
                 <DialogTitle className="dialog-title">
-                    <Typography variant="h5" component="div">
+                    <Typography 
+                        variant="h5" 
+                        component="div"
+                        sx={{ textTransform: "uppercase" }}
+                    >
                         {noteDetail.title}
                     </Typography>
                     <Typography variant="body2" className="dialog-edit">
@@ -114,7 +118,7 @@ export default function NoteDetails() {
                     </Typography>
                 </DialogTitle>
                 <Divider />
-                <DialogContent style={{ width: '500px', height: '300px' }}>
+                <DialogContent style={{ width: '650px', height: '300px' }}>
                     {noteBodyEl}
                 </DialogContent>
                 <DialogActions>

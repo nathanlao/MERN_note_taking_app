@@ -45,7 +45,9 @@ export default function ListNotes({ notes, setNotes }) {
                     </ListItemIcon>
                     <Link to={`/${note.id}`} >
                         <ListItemText 
-                            primary={note.title} sx={{ marginLeft: -2 }}
+                            sx={{ marginLeft: -2 }}
+                            primaryTypographyProps={{ textTransform: "uppercase" }}
+                            primary={note.title} 
                             secondary={`Created at: ${moment(note.timeCreated).startOf('ss').fromNow()}`}
                         />
                     </Link>
