@@ -96,7 +96,19 @@ export default function EditNotes({ setNotes }) {
                     }
                     const response = await axios.put(`http://localhost:3001/api/notes/${noteId}`, updatedNote)
                     const data = response.data
+
+                    // Update setNotes state
+                    setNotes(prevNotes => {
+                        const updatedNotes = prevNotes.map(note => {
+                            if (note.id === noteId) {
+                                return updatedNote
+                            }
+                            return note
+                        })
+                        return updatedNotes
+                    })
                     
+                    navigate("/", {replace: true})
                 } catch (err) {
                     console.log(err)
                 }
@@ -104,7 +116,6 @@ export default function EditNotes({ setNotes }) {
 
             if (isEditing) {
                 editCurrentNote()
-                navigate("/", {replace: true})
             } else {
                 saveNewNote()
             }
