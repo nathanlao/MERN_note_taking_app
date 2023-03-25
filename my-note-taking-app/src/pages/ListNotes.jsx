@@ -1,18 +1,30 @@
-import React, { useState } from "react"
+import React from "react"
 import { Link } from "react-router-dom"
-import { Grid, List, Typography, ListItem, ListItemText, ListItemIcon, IconButton, Divider } from "@mui/material"
+import { List, Typography, ListItem, ListItemText, ListItemIcon, IconButton, Divider } from "@mui/material"
 import EventNoteOutlinedIcon from '@mui/icons-material/EventNoteOutlined';
 import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined';
 import moment from "moment"
+import axios from "axios"
 
-export default function ListNotes({ notes }) {
+export default function ListNotes({ notes, setNotes }) {
+
+    async function handleDeleteNote(id) {
+        try {
+            const response = await axios.delete(`http://localhost:3001/api/notes/${id}`)
+            const data = response.data
+             // update state of notes after successful delete request
+            setNotes(preNotes => preNotes.filter((note) => id !== note._id))
+        } catch (err) {
+            console.log(err)
+        }
+    }
 
     // Map over note element with List into component
     const noteElements = notes.map((note) => {
         return  (
             <List key={note._id} >
                 <ListItem secondaryAction={
-                        <IconButton edge="end" aria-label="delete">
+                        <IconButton edge="end" aria-label="delete" onClick={() => handleDeleteNote(note._id)}>
                             <DeleteForeverOutlinedIcon />
                         </IconButton>
                     }

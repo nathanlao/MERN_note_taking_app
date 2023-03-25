@@ -55,7 +55,7 @@ export default function App() {
         <main>
             <Routes>
                 <Route path="/" element={<Layout setNotes={setNotes}/>}>
-                    <Route path="/" element={<NotesLayout notes={notes}/>} > 
+                    <Route path="/" element={<NotesLayout notes={notes} setNotes={setNotes}/>} > 
                         <Route path=":id" element={<NoteDetails />} />  
                     </Route>
                 </Route>

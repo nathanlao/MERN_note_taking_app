@@ -35,7 +35,6 @@ export default function NoteDetails() {
                     console.log("Fetching note details from db")
                     const data = response.data
                     setNoteDetail(data)
-                    console.log(data)
                 } catch (err) {
                     setError(err)
                     console.log(err)
