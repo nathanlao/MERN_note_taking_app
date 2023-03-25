@@ -15,7 +15,7 @@ export default function ListNotes({ notes, setNotes }) {
                 const response = await axios.delete(`http://localhost:3001/api/notes/${id}`)
                 const data = response.data
                  // update state of notes after successful delete request
-                setNotes(preNotes => preNotes.filter((note) => id !== note._id))
+                setNotes(preNotes => preNotes.filter((note) => id !== note.id))
             } catch (err) {
                 console.log(err)
             }
@@ -25,9 +25,9 @@ export default function ListNotes({ notes, setNotes }) {
     // Map over note element with List into component
     const noteElements = notes.map((note) => {
         return  (
-            <List key={note._id} >
+            <List key={note.id} >
                 <ListItem secondaryAction={
-                        <IconButton edge="end" aria-label="delete" onClick={() => handleDeleteNote(note._id)}>
+                        <IconButton edge="end" aria-label="delete" onClick={() => handleDeleteNote(note.id)}>
                             <DeleteForeverOutlinedIcon />
                         </IconButton>
                     }
@@ -37,7 +37,7 @@ export default function ListNotes({ notes, setNotes }) {
                     <ListItemIcon>
                         <EventNoteOutlinedIcon />
                     </ListItemIcon>
-                    <Link to={`/${note._id}`} >
+                    <Link to={`/${note.id}`} >
                         <ListItemText 
                             primary={note.title} sx={{ marginLeft: -2 }}
                             secondary={`Created at: ${moment(note.timeCreated).startOf('ss').fromNow()}`}
