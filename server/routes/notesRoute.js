@@ -22,9 +22,9 @@ router.get('/notes', async (req, res) => {
 // GET a note by id
 router.get('/notes/:id', async (req, res) => {
     const id = req.params.id
-    // console.log(id)
+
     try {
-        const note = await Note.findById(id)
+        const note = await Note.find({ id: id })
         if (note === null) {
             res.status(404).send("Note not found!")
         } else {
@@ -40,12 +40,20 @@ router.get('/notes/:id', async (req, res) => {
 // POST a new note
 router.post('/notes', async (req, res) => {
     try {
-        const { title, body, color } = req.body
+        const { id, title, body, color } = req.body
         const newNoteObj  = new Note({
+            id: id,
             title: title,
             body: body,
             color: color
         }) 
+        
+        if (!title || !body) {
+            throw {
+                message: "Title or body required"
+            }
+        }
+
         const newNote = await newNoteObj.save()
         console.log('New note saved to db!')
         res.status(200).json(newNote)
