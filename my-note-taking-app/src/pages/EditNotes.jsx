@@ -10,6 +10,7 @@ export default function EditNotes({ setNotes }) {
     const location = useLocation()
     const isEditing = location.state !== null
     // Link state: note attributes from note details
+    const noteId = location?.state?.id
     const noteTitle = location?.state?.title
     const noteBody = location?.state?.body
     const noteColor = location?.state?.color
@@ -62,6 +63,7 @@ export default function EditNotes({ setNotes }) {
             });
         } else {
 
+            // POST request to save a new note 
             async function saveNewNote() {
                 try {
                     const newNote = {
@@ -82,7 +84,30 @@ export default function EditNotes({ setNotes }) {
                     console.log(err)
                 }
             }
-            saveNewNote()
+
+            // PUT request to modify a current note
+            async function editCurrentNote() {
+                try {
+                    const updatedNote = {
+                        id: noteId,
+                        title: title,
+                        body: body,
+                        color: color
+                    }
+                    const response = await axios.put(`http://localhost:3001/api/notes/${noteId}`, updatedNote)
+                    const data = response.data
+                    
+                } catch (err) {
+                    console.log(err)
+                }
+            }
+
+            if (isEditing) {
+                editCurrentNote()
+                navigate("/", {replace: true})
+            } else {
+                saveNewNote()
+            }
         }
 
         // Clear the textfield
