@@ -10,15 +10,18 @@ export default function NoteDetails() {
     // Open the modal depends on id on the path
     const [open, setOpen] = useState(false)
     const [noteDetail, setNoteDetail] = useState([])
+    const [loading, setLoading] = useState(false)
+    const [error, setError] = useState(null)
     const { id } = useParams()
 
     useEffect(() => {
-        if (id) {
+        if (id || error) {
             setOpen(true)
         }
 
         if (open) {
             async function getNoteDetails() {
+                setLoading(true)
                 try {
                     const response = await axios.get(`http://localhost:3001/api/notes/${id}`)
                     if (response.status !== 200) {
@@ -34,7 +37,10 @@ export default function NoteDetails() {
                     setNoteDetail(data)
                     console.log(data)
                 } catch (err) {
+                    setError(err)
                     console.log(err)
+                } finally {
+                    setLoading(false)
                 }
             }
             getNoteDetails()
@@ -61,6 +67,23 @@ export default function NoteDetails() {
                 </ListItem>
             )
         })
+    }  
+    
+    if (error) {
+        return (
+            <Dialog open={open} onClose={handleClose}>
+                <DialogTitle className="dialog-title">
+                    <Typography variant="h5" component="div">
+                        There was an error: {error.message}
+                    </Typography>
+                </DialogTitle>
+                <DialogActions>
+                    <Link to="/" className="dialog-close-btn">
+                        <Button onClick={handleClose}>Close</Button>
+                    </Link>
+                </DialogActions>
+            </Dialog>
+        )
     }
     
     return (
