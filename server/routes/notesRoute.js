@@ -69,12 +69,12 @@ router.put('/notes/:id', async (req, res) => {
     const { title, body, color } = req.body
 
     try {
-        const note = await Note.findById(id)
+        const note = await Note.find({ id: id })
         if (note === null) {
             res.status(404).send("Note not found!")
         } else {
             const updatedNote = await Note.updateOne(
-                { _id: id },
+                { id: id },
                 { $set: {
                     "title": title, 
                     "body": body, 
@@ -97,11 +97,11 @@ router.put('/notes/:id', async (req, res) => {
 router.delete('/notes/:id', async (req, res) => {
     const id = req.params.id
     try {
-        const note = await Note.findById(id)
+        const note = await Note.find({ id: id })
         if (note === null) {
             res.status(404).send("Note not found!")
         } else {
-            const deletedNote = await Note.deleteOne({ _id: id })
+            const deletedNote = await Note.deleteOne({ id: id })
             console.log('Note deleted from db!')
             res.json(deletedNote)
         }
