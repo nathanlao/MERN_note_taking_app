@@ -40,11 +40,10 @@ router.get('/notes/:id', async (req, res) => {
 // POST a new note
 router.post('/notes', async (req, res) => {
     try {
-        const { title, body, priority, color } = req.body
+        const { title, body, color } = req.body
         const newNoteObj  = new Note({
             title: title,
             body: body,
-            priority: priority,
             color: color
         }) 
         const newNote = await newNoteObj.save()
@@ -59,7 +58,7 @@ router.post('/notes', async (req, res) => {
 // PUT (update) a note by id
 router.put('/notes/:id', async (req, res) => {
     const id = req.params.id
-    const { title, body, priority, color } = req.body
+    const { title, body, color } = req.body
 
     try {
         const note = await Note.findById(id)
@@ -71,7 +70,6 @@ router.put('/notes/:id', async (req, res) => {
                 { $set: {
                     "title": title, 
                     "body": body, 
-                    "priority": priority, 
                     "color": color,
                     "timeLastModified": Date.now()
                     }

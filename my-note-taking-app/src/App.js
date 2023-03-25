@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react"
-import ListNotes from "./pages/ListNotes"
 import { Routes, Route } from "react-router-dom"
 import Layout from "./components/Layout"
+import NotesLayout from "./components/NotesLayout"
+import NoteDetails from "./pages/NoteDetails"
 import axios from "axios"
 
 export default function App() {
@@ -36,6 +37,7 @@ export default function App() {
                         status: response.status
                     }
                 }
+                console.log("Fetching notes from db")
                 const data = response.data
                 setNotes(data)
             } catch (err) {
@@ -49,12 +51,13 @@ export default function App() {
     if (error) {
         return <h1>There was an error: {error.message}</h1>
     }
-
     return (
         <main>
             <Routes>
-                <Route path="/notes" element={<Layout setNotes={setNotes}/>}>
-                    <Route index element={<ListNotes notes={notes}/>} />  
+                <Route path="/" element={<Layout setNotes={setNotes}/>}>
+                    <Route path="/" element={<NotesLayout notes={notes} setNotes={setNotes}/>} > 
+                        <Route path=":id" element={<NoteDetails />} />  
+                    </Route>
                 </Route>
             </Routes>
         </main>

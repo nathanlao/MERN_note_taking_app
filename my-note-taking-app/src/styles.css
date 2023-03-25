@@ -10,32 +10,30 @@ body {
 }
 
 .form-container,
-.section-container {
-    margin: 1.875em 6.25em 6.25em;
+.list-notes-container {
+    margin: 1.875em auto 6.25em auto;
 }
 
 /* Form edit notes style */
 
-.form-container {
+.form-container,
+.list-notes-container {
     display: flex;
     flex-direction: column;
+    max-width: 650px;
 }
 
-.form-textarea,
 .form-save-note {
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, .3);
     font-size: 1rem;
-    border-radius: 3px;
     border: none;
     font-family: inherit;
     letter-spacing: 0.5px;
 }
 
-.form-textarea {
-    background-color: #f8f9fa;
-    padding: 1em;
-    resize: none;
-    width: 100%;
-    height: 250px;
+.form-save-note:last-of-type {
+    border-radius: 0px 0px 6px 6px;
+    border-top: none;
 }
 
 .form-save-note {
@@ -52,116 +50,35 @@ body {
 
 /* section lists of notes style */
 
-.section-heading {
-    font-weight: 400;
-    margin: 0;
+.list-notes-container a {
+    text-decoration: none;
+    color:#4361ee;
 }
 
-.section-list-notes {
-    text-transform: uppercase;
-    margin: 0.625em 0;
-    padding: 0;
-    line-height: 1.3;
-    letter-spacing: 0.5px;
+.list-notes-container a:hover, 
+.list-notes-container a:active {
+    color: #e3a30d;
 }
 
-.section-list-notes li::marker {
-    content: '☞ ';
-    font-size: 1.3rem;
+.list-notes {
+    background-color: #f5f5f5;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.section-list-notes a {
-    color: #4361ee;
+.list-notes:hover {
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
+    background-color: #ffffff;
 }
 
-.section-list-notes a:hover,
-.section-list-notes a:active { 
-    color: #ffd166;
-}
+/* Dialog */
 
-/* modal pop up */
-
-.modal {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    margin: auto;
-
-    max-height: 40%;
-    max-width: 40%;
-    border-radius: 10px;
-    box-shadow: 0px 0px 6px 2px #1b263b;
-    background-color: #779be7;
-    color: #e0e1dd;
-}
-
-.modal-notes-container {
+.dialog-title{
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: start;
-    margin: 0.625em 0 0 0.625em;
+    justify-content: space-between;
+    align-items: baseline;
 }
 
-.modal-notes-title {
-    font-size: 1.3rem;
-    font-weight: 700;
-    margin: 0 0 0 1em;
-    text-transform: uppercase;
-}
-
-.modal-notes-body {
-    margin: 1.1em 0;
-    line-height: 1.4;
-}
-
-.modal-notes-body li::marker {
-    content: '☞ ';
-    font-size: 1.3rem;
-}
-
-.modal-close-btn-container {
-    text-align: right;
-    margin: 0.6em 0.8em 0 0;
-    font-size: 20px;
-}
-
-.modal-close {
-    cursor: pointer;
-}
-
-.modal-close:hover {
-    color: #ffd166;
-}
-
-.modal-overlay {
-    position: fixed; /* position it to the screen */
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,0.5); /* make the background semi-transparent black */
-    z-index: 1; /* make sure it stay on top of other elements */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-@media (min-width: 576px) {
-    
-    .modal-notes-title {
-        font-size: 1.875rem;
-    }
-
-    .modal-notes-body {
-        margin: 1.25em 0;
-        line-height: 1.4;
-    }
-
-    .modal-close-btn-container {
-        margin: 0.7em 0.9em 0 0;
-        font-size: 30px;
-    }
+.dialog-close-btn {
+    text-decoration: none;
 }

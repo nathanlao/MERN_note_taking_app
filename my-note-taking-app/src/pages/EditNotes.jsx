@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import swal from "sweetalert"
+import { TextField } from "@mui/material";
 import { nanoid } from "nanoid"
 
 export default function EditNotes({ setNotes }) {
 
+    const [title, setTitle] = useState("")
+    const [body, setBody] = useState("")
     const [note, setNote] = useState("")
 
     function handleSubmit(event) {
@@ -48,21 +51,40 @@ export default function EditNotes({ setNotes }) {
         setNote("")
     }
     
-    function handleChange(event) {
+    // function handleChange(event) {
+    //     const { value } = event.target
+    //     setNote(value)
+    // }
+
+    function handleTitleChange(event) {
         const { value } = event.target
-        setNote(value)
+        setTitle(value)
+    }
+
+    function handleBodyChange(event) {
+        const { value } = event.target
+        setBody(value)
     }
 
     return (
         <form className="form-container" onSubmit={handleSubmit}>
-            <textarea 
-                className="form-textarea"
-                placeholder="Title your note here and separate content with new line for clear organization..."
-                onChange={handleChange}
+            <TextField 
+                style={{backgroundColor: "white", borderRadius: '6px 6px 0px 0px'}}
+                label="Title"
+                variant="filled"
                 // Controlled component (controlled by react state)
-                value={note}
-                name={note}
-                />
+                value={title}
+                onChange={handleTitleChange}
+            />
+            <TextField
+            style={{backgroundColor: "white"}}
+                label="Body"
+                variant="filled"
+                multiline
+                rows={5}
+                value={body}
+                onChange={handleBodyChange}
+            />
             <button className="form-save-note">SAVE NOTE</button>
         </form>
     )
