@@ -1,60 +1,64 @@
 import React, { useState } from "react";
 import swal from "sweetalert"
-import { TextField } from "@mui/material";
+import { TextField, Button, FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 import { nanoid } from "nanoid"
 
 export default function EditNotes({ setNotes }) {
 
+    const colors = [
+        { label: "White", value: "white" },
+        { label: "Blue", value: "blue" },
+        { label: "Green", value: "green" },
+        { label: "Yellow", value: "yellow" },
+    ];
+
     const [title, setTitle] = useState("")
     const [body, setBody] = useState("")
-    const [note, setNote] = useState("")
+    const [color, setColor] = useState("")
 
     function handleSubmit(event) {
         // Prevent the page refresh
         event.preventDefault()
+
+        console.log(title, body, color)
         
-        if (note.trim().length === 0) {
-            swal({
-                title: "Warning",
-                text: "Please type down your notes before saving...",
-                icon: "warning",
-                button: "OK"
-            });
-        } else {
+        // if (note.trim().length === 0) {
+        //     swal({
+        //         title: "Warning",
+        //         text: "Please type down your notes before saving...",
+        //         icon: "warning",
+        //         button: "OK"
+        //     });
+        // } else {
 
-            // split the newNote with title and body
-            const newLineIndex = note.indexOf("\n")
-            let title = ""
-            let body = ""
+        //     // split the newNote with title and body
+        //     const newLineIndex = note.indexOf("\n")
+        //     let title = ""
+        //     let body = ""
 
-            // if no newline found
-            if(newLineIndex === -1) {
-                title = note
-                body = ""
-            } else {
-                title = note.slice(0, newLineIndex)
-                body = note.slice(newLineIndex + 1)
-            }
+        //     // if no newline found
+        //     if(newLineIndex === -1) {
+        //         title = note
+        //         body = ""
+        //     } else {
+        //         title = note.slice(0, newLineIndex)
+        //         body = note.slice(newLineIndex + 1)
+        //     }
 
-            // Give the newNote a nanoid
-            const newNoteObject = {
-                id: nanoid(),
-                title: title,
-                body: body
-            }
-            setNotes(prevNotes => {
-                return [...prevNotes, newNoteObject]
-            })
-        }
+        //     // Give the newNote a nanoid
+        //     const newNoteObject = {
+        //         id: nanoid(),
+        //         title: title,
+        //         body: body
+        //     }
+        //     setNotes(prevNotes => {
+        //         return [...prevNotes, newNoteObject]
+        //     })
+        // }
 
-        // Clear the textarea
-        setNote("")
+        // // Clear the textarea
+        // setNote("")
     }
-    
-    // function handleChange(event) {
-    //     const { value } = event.target
-    //     setNote(value)
-    // }
 
     function handleTitleChange(event) {
         const { value } = event.target
@@ -65,6 +69,17 @@ export default function EditNotes({ setNotes }) {
         const { value } = event.target
         setBody(value)
     }
+
+    function handleColorChange(event) {
+        const { value } = event.target
+        setColor(value)
+    }
+
+    const selectColorEl = colors.map((color) => (
+        <MenuItem key={color.value} value={color.value}>
+            {color.label}
+        </MenuItem>
+    ))
 
     return (
         <form className="form-container" onSubmit={handleSubmit}>
@@ -77,7 +92,7 @@ export default function EditNotes({ setNotes }) {
                 onChange={handleTitleChange}
             />
             <TextField
-            style={{backgroundColor: "white"}}
+                style={{backgroundColor: "white"}}
                 label="Body"
                 variant="filled"
                 multiline
@@ -85,7 +100,23 @@ export default function EditNotes({ setNotes }) {
                 value={body}
                 onChange={handleBodyChange}
             />
-            <button className="form-save-note">SAVE NOTE</button>
+            <TextField 
+                select
+                variant="filled"
+                style={{backgroundColor: "white"}}
+                label="Color"
+                value={color}
+                onChange={handleColorChange}
+            >
+                {selectColorEl}
+            </TextField>
+            <Button 
+                className="form-save-note" 
+                type="submit" 
+                variant="contained"
+            >
+                SAVE NOTE
+            </Button>
         </form>
     )
 }
