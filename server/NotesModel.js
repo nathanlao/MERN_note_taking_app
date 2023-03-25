@@ -24,7 +24,7 @@ const NoteSchema = new Schema({
     },
     color: {
         type: String,
-        default: "white"
+        default: "#ffffff"
     },
 })
 
