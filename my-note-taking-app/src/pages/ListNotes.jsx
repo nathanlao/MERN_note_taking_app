@@ -9,13 +9,16 @@ import axios from "axios"
 export default function ListNotes({ notes, setNotes }) {
 
     async function handleDeleteNote(id) {
-        try {
-            const response = await axios.delete(`http://localhost:3001/api/notes/${id}`)
-            const data = response.data
-             // update state of notes after successful delete request
-            setNotes(preNotes => preNotes.filter((note) => id !== note._id))
-        } catch (err) {
-            console.log(err)
+        const confirmDelete = window.confirm("Are you sure you want to delete this note?");
+        if (confirmDelete) {
+            try {
+                const response = await axios.delete(`http://localhost:3001/api/notes/${id}`)
+                const data = response.data
+                 // update state of notes after successful delete request
+                setNotes(preNotes => preNotes.filter((note) => id !== note._id))
+            } catch (err) {
+                console.log(err)
+            }
         }
     }
 
