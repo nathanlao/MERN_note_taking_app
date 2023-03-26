@@ -213,7 +213,7 @@ export default function EditNotes({ setNotes }) {
                 autoHideDuration={6000}
                 onClose={() => setOpenWarning(false)}
             >
-                <Alert onClose={() => setOpenCreateSnackbar(false)} severity="warning" sx={{ width: '100%' }}>
+                <Alert onClose={() => setOpenWarning(false)} severity="warning" sx={{ width: '100%' }}>
                     Please enter your notes before saving!
                 </Alert>
             </Snackbar>
