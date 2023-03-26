@@ -16,11 +16,11 @@ const NoteSchema = new Schema({
     },
     timeLastModified: {
         type: Date,
-        default: Date.now
+        default: Date.now()
     },
     timeCreated: {
         type: Date,
-        default: Date.now
+        default: Date.now()
     },
     color: {
         type: String,

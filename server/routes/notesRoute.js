@@ -40,12 +40,14 @@ router.get('/notes/:id', async (req, res) => {
 // POST a new note
 router.post('/notes', async (req, res) => {
     try {
-        const { id, title, body, color } = req.body
+        const { id, title, body, color, timeCreated, timeLastModified } = req.body
         const newNoteObj  = new Note({
             id: id,
             title: title,
             body: body,
-            color: color
+            color: color,
+            timeCreated: timeCreated,
+            timeLastModified: timeLastModified
         }) 
         
         if (!title) {
@@ -66,7 +68,7 @@ router.post('/notes', async (req, res) => {
 // PUT (update) a note by id
 router.put('/notes/:id', async (req, res) => {
     const id = req.params.id
-    const { title, body, color } = req.body
+    const { title, body, color, timeLastModified } = req.body
 
     try {
         const note = await Note.find({ id: id })
@@ -79,7 +81,7 @@ router.put('/notes/:id', async (req, res) => {
                     "title": title, 
                     "body": body, 
                     "color": color,
-                    "timeLastModified": Date.now()
+                    "timeLastModified": timeLastModified
                     }
                 }, 
                 {upsert: true}

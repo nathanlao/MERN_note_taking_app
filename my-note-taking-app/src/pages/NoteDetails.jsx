@@ -108,7 +108,9 @@ export default function NoteDetails() {
                                 id: noteDetail.id,
                                 title: noteDetail.title,
                                 body: noteDetail.body,
-                                color: noteDetail.color
+                                color: noteDetail.color,
+                                timeCreated: noteDetail.timeCreated,
+                                timeLastModified: noteDetail.timeLastModified
                             }
                         }>
                             <IconButton>
