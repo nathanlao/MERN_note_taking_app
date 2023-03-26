@@ -86,7 +86,7 @@ export default function NoteDetails() {
         <>
             <Dialog open={open} onClose={handleClose} PaperProps={{
                     style: {
-                        backgroundColor: `${noteDetail.color}`,
+                        backgroundColor: `${noteDetail?.color}`,
                         color: "#333333",
                         borderRadius: "10px",
                         overflow: "hidden",
@@ -99,18 +99,18 @@ export default function NoteDetails() {
                         component="div"
                         sx={{ textTransform: "uppercase" }}
                     >
-                        {noteDetail.title}
+                        {noteDetail?.title}
                     </Typography>
                     <Typography variant="body2" className="dialog-edit">
-                        Last Modified: {moment(noteDetail.timeLastModified).startOf('ss').fromNow() }
+                        Last Modified: {moment(noteDetail?.timeLastModified).startOf('ss').fromNow() }
                         <Link to="/" state={
                             {
-                                id: noteDetail.id,
-                                title: noteDetail.title,
-                                body: noteDetail.body,
-                                color: noteDetail.color,
-                                timeCreated: noteDetail.timeCreated,
-                                timeLastModified: noteDetail.timeLastModified
+                                id: noteDetail?.id,
+                                title: noteDetail?.title,
+                                body: noteDetail?.body,
+                                color: noteDetail?.color,
+                                timeCreated: noteDetail?.timeCreated,
+                                timeLastModified: noteDetail?.timeLastModified
                             }
                         }>
                             <IconButton>
