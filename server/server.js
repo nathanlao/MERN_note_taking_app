@@ -11,10 +11,11 @@ dotenv.config()
 const port = process.env.PORT || 8080
 
 // Connect to MongoDB cmpt372asn3 database
-const username = process.env.MONGOOSE_USER
-const password = process.env.MONGOOSE_PWD
+// const username = process.env.MONGOOSE_USER
+// const password = process.env.MONGOOSE_PWD
+// `mongodb+srv://${username}:${password}@cluster0.vmsvedd.mongodb.net/cmpt372asn3?retryWrites=true&w=majority`
 mongoose.connect(
-    `mongodb+srv://${username}:${password}@cluster0.vmsvedd.mongodb.net/cmpt372asn3?retryWrites=true&w=majority`
+    'mongodb://mongodb:27017/my-notes-db', { useNewUrlParser: true, useUnifiedTopology: true }
 )
 
 // Check connection
