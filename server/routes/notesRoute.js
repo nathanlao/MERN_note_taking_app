@@ -40,12 +40,14 @@ router.get('/notes/:id', async (req, res) => {
 // POST a new note
 router.post('/notes', async (req, res) => {
     try {
-        const { id, title, body, color } = req.body
+        const { id, title, body, color, timeCreated, timeLastModified } = req.body
         const newNoteObj  = new Note({
             id: id,
             title: title,
             body: body,
-            color: color
+            color: color,
+            timeCreated: timeCreated,
+            timeLastModified: timeLastModified
         }) 
         
         if (!title) {

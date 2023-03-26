@@ -75,7 +75,9 @@ export default function EditNotes({ setNotes }) {
                         id: nanoid(),
                         title: title,
                         body: body,
-                        color: color
+                        color: color,
+                        timeCreated: Date.now(),
+                        timeLastModified: Date.now()
                     }
 
                     const response = await axios.post("http://localhost:3001/api/notes", newNote)
