@@ -2,7 +2,7 @@ version: "3.9"
 services:
   nodejs:
     container_name: nodejs-container
-    image: nathanasn3/note-taking-app:latest
+    image: nnnnisidle/note-taking-app:1.0.0
     restart: always
     ports: 
       - "3000:3000"
