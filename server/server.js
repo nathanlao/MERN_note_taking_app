@@ -4,6 +4,7 @@ const app = express()
 const mongoose = require('mongoose')
 const notesRoute = require('./routes/notesRoute')
 const cors = require('cors')
+const path = require('path')
 const dotenv = require('dotenv')
 dotenv.config()
 
@@ -25,6 +26,8 @@ db.once('open', () => {
 
 app.use(cors())
 
+app.use(express.static('public/build'))
+
 // Parse incoming requests data
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
@@ -36,6 +39,11 @@ app.use('/', (req, res, next) => {
 })
 
 app.use('/api', notesRoute)
+
+// For any request that doesn't match one above, send back React's index.html file.
+app.all('*', (req, res) => {
+    res.sendFile('public/build/index.html')
+})
 
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`)
