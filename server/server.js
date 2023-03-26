@@ -42,7 +42,7 @@ app.use('/api', notesRoute)
 
 // For any request that doesn't match one above, send back React's index.html file.
 app.all('*', (req, res) => {
-    res.sendFile('public/build/index.html')
+    res.sendFile(path.join(__dirname, 'public/build/index.html'))
 })
 
 app.listen(port, () => {
