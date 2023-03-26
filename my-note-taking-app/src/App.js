@@ -30,7 +30,7 @@ export default function App() {
         async function getAllNotes() {
             setLoading(true)
             try {
-                const response = await axios.get("http://localhost:3001/api/notes")
+                const response = await axios.get("/api/notes")
                 if (response.status !== 200) {
                     // eslint-disable-next-line no-throw-literal
                     throw {

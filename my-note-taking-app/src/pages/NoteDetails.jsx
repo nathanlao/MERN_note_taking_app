@@ -22,7 +22,7 @@ export default function NoteDetails() {
         if (open) {
             async function getNoteDetails() {
                 try {
-                    const response = await axios.get(`http://localhost:3001/api/notes/${id}`)
+                    const response = await axios.get(`/api/notes/${id}`)
                     if (response.status !== 200) {
                         // eslint-disable-next-line no-throw-literal
                         throw {
