@@ -10,6 +10,9 @@ const Note = require('../NotesModel')
 // GET all notes
 router.get('/notes', async (req, res) => {
     try {
+        // Set a delay before fetching the notes from the database
+        await new Promise(resolve => setTimeout(resolve, 1000));
+
         const notes = await Note.find()
         console.log('Notes fetched from db!')
         res.status(200).json(notes)

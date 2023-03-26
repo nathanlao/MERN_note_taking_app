@@ -23,10 +23,12 @@ export default function App() {
      */
 
     const [notes, setNotes] = useState([])
+    const [loading, setLoading] = useState(false)
     const [error, setError] = useState(null)
 
     useEffect(() => {
         async function getAllNotes() {
+            setLoading(true)
             try {
                 const response = await axios.get("http://localhost:3001/api/notes")
                 if (response.status !== 200) {
@@ -43,6 +45,8 @@ export default function App() {
             } catch (err) {
                 setError(err)
                 console.log(err)
+            } finally {
+                setLoading(false)
             }
         }
         getAllNotes()
@@ -51,11 +55,12 @@ export default function App() {
     if (error) {
         return <h1>There was an error: {error.message}</h1>
     }
+
     return (
         <main>
             <Routes>
                 <Route path="/" element={<Layout setNotes={setNotes}/>}>
-                    <Route path="/" element={<NotesLayout notes={notes} setNotes={setNotes}/>} > 
+                    <Route path="/" element={<NotesLayout notes={notes} setNotes={setNotes} loading={loading}/>} > 
                         <Route path=":id" element={<NoteDetails />} />  
                     </Route>
                 </Route>

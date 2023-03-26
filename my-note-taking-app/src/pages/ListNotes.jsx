@@ -1,13 +1,14 @@
 import React, { useState } from "react"
 import { Link } from "react-router-dom"
 import { Grid, List, Typography, ListItem, ListItemText, 
-    ListItemIcon, IconButton, Divider, Snackbar, Alert } from "@mui/material"
+    ListItemIcon, IconButton, Divider, Snackbar, Alert,
+    CircularProgress, Box } from "@mui/material"
 import EventNoteOutlinedIcon from '@mui/icons-material/EventNoteOutlined';
 import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined';
 import moment from "moment"
 import axios from "axios"
 
-export default function ListNotes({ notes, setNotes }) {
+export default function ListNotes({ notes, setNotes, loading }) {
 
     const [openSnackbar, setOpenSnackbar] = useState(false)
 
@@ -62,18 +63,32 @@ export default function ListNotes({ notes, setNotes }) {
     return (
         <section className="list-notes-container">
             <Typography sx={{ mt: 0, mb: 2 }} variant="h5" component="div">YOUR NOTES:</Typography> 
-            <Grid container spacing={1}>
-                {noteElements}
-            </Grid>
-            <Snackbar
-                open={openSnackbar}
-                onClose={() => setOpenSnackbar(false)}
-                autoHideDuration={3000}
-            >
-                <Alert onClose={() => setOpenSnackbar(false)} severity="success" sx={{ width: '100%' }}>
-                    Successfully deleted your note!
-                </Alert>
-            </Snackbar>
+            {
+                loading 
+                ?   <Box sx={{ display: 'flex', justifyContent: "center" }}>
+                        <CircularProgress color="success"/>
+                    </Box>
+                : (
+                <>
+                    <Grid container spacing={1}>
+                        {noteElements}
+                    </Grid>
+                    <Snackbar
+                        open={openSnackbar}
+                        onClose={() => setOpenSnackbar(false)}
+                        autoHideDuration={3000}
+                    >
+                        <Alert 
+                            onClose={() => setOpenSnackbar(false)} 
+                            severity="success" 
+                            sx={{ width: '100%' }}
+                        >
+                            Successfully deleted your note!
+                        </Alert>
+                    </Snackbar>
+                </>
+                )
+            }
         </section>
     )
 }
