@@ -66,7 +66,7 @@ export default function ListNotes({ notes, setNotes, loading }) {
             {
                 loading 
                 ?   <Box sx={{ display: 'flex', justifyContent: "center" }}>
-                        <CircularProgress color="success"/>
+                        <CircularProgress color="success" className="loading-icon"/>
                     </Box>
                 : (
                 <>

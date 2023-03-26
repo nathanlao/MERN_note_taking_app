@@ -43,6 +43,9 @@ router.get('/notes/:id', async (req, res) => {
 // POST a new note
 router.post('/notes', async (req, res) => {
     try {
+        // Set a delay before fetching the notes from the database
+        await new Promise(resolve => setTimeout(resolve, 1000));
+
         const { id, title, body, color, timeCreated, timeLastModified } = req.body
         const newNoteObj  = new Note({
             id: id,

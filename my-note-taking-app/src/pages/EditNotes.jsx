@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { TextField, Button, MenuItem, Snackbar, Alert } from "@mui/material";
+import { TextField, Button, MenuItem, Snackbar, Alert, CircularProgress } from "@mui/material";
 import axios from "axios";
 import { nanoid } from "nanoid"
 import { useLocation, useNavigate } from "react-router-dom";
@@ -34,6 +34,7 @@ export default function EditNotes({ setNotes }) {
     const [openCreateSnackbar, setOpenCreateSnackbar] = useState(false);
     const [openEditSnackbar, setOpenEditSnackbar] = useState(false);
     const [openCancelSnackbar, setOpenCancelSnackbar] = useState(false);
+    const [loading, setLoading] = useState(false)
 
     useEffect(() => {
         if (isEditing) {
@@ -67,6 +68,7 @@ export default function EditNotes({ setNotes }) {
 
             // POST request to save a new note 
             async function saveNewNote() {
+                setLoading(true)
                 try {
                     const newNote = {
                         id: nanoid(),
@@ -89,6 +91,8 @@ export default function EditNotes({ setNotes }) {
 
                 } catch (err) {
                     console.log(err)
+                } finally {
+                    setLoading(false)
                 }
             }
 
@@ -205,7 +209,13 @@ export default function EditNotes({ setNotes }) {
                     type="submit" 
                     variant="contained"
                 >
-                    {isEditing ? "SAVE EDITED NOTE" : "CREATE NEW NOTE"}
+                    {loading ? (
+                        <CircularProgress size={25} className="post-loading-icon" />
+                    ) : (
+                        <>
+                            {isEditing ? "SAVE EDITED NOTE" : "CREATE NEW NOTE"}
+                        </>
+                    )}
                 </Button>
             </form>
             <Snackbar

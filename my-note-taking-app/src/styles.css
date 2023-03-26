@@ -86,6 +86,16 @@ body {
     gap: 10px;
 }
 
+/* Loading icon */
+
+.loading-icon {
+    color: #4361ee !important;
+}
+
+.post-loading-icon {
+    color: #dee2ff !important;
+}
+
 @media(max-width: 949px) {
     .form-container,
     .list-notes-container {
