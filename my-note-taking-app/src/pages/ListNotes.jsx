@@ -16,7 +16,7 @@ export default function ListNotes({ notes, setNotes, loading }) {
         const confirmDelete = window.confirm("Are you sure you want to delete this note?");
         if (confirmDelete) {
             try {
-                const response = await axios.delete(`http://localhost:3001/api/notes/${id}`)
+                const response = await axios.delete(`/api/notes/${id}`)
                 const data = response.data
 
                 setOpenSnackbar(true)

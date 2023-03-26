@@ -22,9 +22,9 @@ export default function EditNotes({ setNotes }) {
         { label: "White", value: "#ffffff" },
         { label: "Pale Pink", value: "#f5cac3" },
         { label: "Baby Blue", value: "#ade8f4" },
-        { label: "Mustard yellow", value: "#e9c46a" },
-        { label: "Pale green", value: "#cbdfbd" },
-        { label: "Lavender purple", value: "#9c89b8" },
+        { label: "Mustard Yellow", value: "#e9c46a" },
+        { label: "Pale Green", value: "#cbdfbd" },
+        { label: "Lavender Purple", value: "#9c89b8" },
     ];
 
     const [title, setTitle] = useState("")
@@ -79,7 +79,7 @@ export default function EditNotes({ setNotes }) {
                         timeLastModified: Date.now()
                     }
 
-                    const response = await axios.post("http://localhost:3001/api/notes", newNote)
+                    const response = await axios.post("/api/notes", newNote)
                     const data = response.data
                     
                     setOpenCreateSnackbar(true)
@@ -108,7 +108,7 @@ export default function EditNotes({ setNotes }) {
                         timeCreated: noteTimeCreated,
                         timeLastModified: Date.now()
                     }
-                    const response = await axios.put(`http://localhost:3001/api/notes/${noteId}`, updatedNote)
+                    const response = await axios.put(`/api/notes/${noteId}`, updatedNote)
                     const data = response.data
 
                     setOpenEditSnackbar(true);
