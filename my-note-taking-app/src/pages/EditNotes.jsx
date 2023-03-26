@@ -223,7 +223,7 @@ export default function EditNotes({ setNotes }) {
                 onClose={() => setOpenCreateSnackbar(false)}
             >
                 <Alert onClose={() => setOpenCreateSnackbar(false)} severity="success" sx={{ width: '100%' }}>
-                    Successfully Created your note!
+                    Successfully created your note!
                 </Alert>
             </Snackbar>
             <Snackbar
@@ -232,7 +232,7 @@ export default function EditNotes({ setNotes }) {
                 onClose={() => setOpenEditSnackbar(false)}
             >
                 <Alert onClose={() => setOpenEditSnackbar(false)} severity="success" sx={{ width: '100%' }}>
-                    Successfully Edited your note!
+                    Successfully edited your note!
                 </Alert>
             </Snackbar>
             <Snackbar
