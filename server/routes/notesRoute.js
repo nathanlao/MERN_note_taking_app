@@ -77,6 +77,10 @@ router.put('/notes/:id', async (req, res) => {
     const { title, body, color, timeLastModified } = req.body
 
     try {
+
+        // Set a delay before fetching the notes from the database
+        await new Promise(resolve => setTimeout(resolve, 1000));
+
         const note = await Note.find({ id: id })
         if (note === null) {
             res.status(404).send("Note not found!")

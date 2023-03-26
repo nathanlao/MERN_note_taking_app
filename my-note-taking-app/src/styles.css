@@ -39,12 +39,6 @@ body {
     background-color: #4361ee !important;
 }
 
-.form-save-note:hover,
-.form-cancel-btn:hover {
-    background-color: #ffd166 !important;
-    color: #001d3d;
-}
-
 /* section lists of notes style */
 
 .list-notes-container a {
@@ -54,7 +48,7 @@ body {
 
 .list-notes-container a:hover, 
 .list-notes-container a:active {
-    color: #e3a30d;
+    color: #344e41;
 }
 
 .list-notes {

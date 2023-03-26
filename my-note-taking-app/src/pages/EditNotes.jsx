@@ -98,6 +98,7 @@ export default function EditNotes({ setNotes }) {
 
             // PUT request to modify a current note
             async function editCurrentNote() {
+                setLoading(true)
                 try {
                     const updatedNote = {
                         id: noteId,
@@ -126,6 +127,8 @@ export default function EditNotes({ setNotes }) {
                     navigate("/", {replace: true})
                 } catch (err) {
                     console.log(err)
+                } finally {
+                    setLoading(false)
                 }
             }
 
