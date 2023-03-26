@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import swal from "sweetalert"
 import { TextField, Button, MenuItem, Snackbar, Alert } from "@mui/material";
 import axios from "axios";
 import { nanoid } from "nanoid"
@@ -31,6 +30,7 @@ export default function EditNotes({ setNotes }) {
     const [title, setTitle] = useState("")
     const [body, setBody] = useState("")
     const [color, setColor] = useState("")
+    const [openWarning, setOpenWarning] = useState(false)
     const [openCreateSnackbar, setOpenCreateSnackbar] = useState(false);
     const [openEditSnackbar, setOpenEditSnackbar] = useState(false);
     const [openCancelSnackbar, setOpenCancelSnackbar] = useState(false);
@@ -60,12 +60,9 @@ export default function EditNotes({ setNotes }) {
         event.preventDefault()
         
         if (!title) {
-            swal({
-                title: "Warning",
-                text: "Please type down your notes before saving...",
-                icon: "warning",
-                button: "OK"
-            });
+
+            setOpenWarning(true)
+
         } else {
 
             // POST request to save a new note 
@@ -211,6 +208,15 @@ export default function EditNotes({ setNotes }) {
                     {isEditing ? "SAVE EDITED NOTE" : "CREATE NEW NOTE"}
                 </Button>
             </form>
+            <Snackbar
+                open={openWarning}
+                autoHideDuration={6000}
+                onClose={() => setOpenWarning(false)}
+            >
+                <Alert onClose={() => setOpenCreateSnackbar(false)} severity="warning" sx={{ width: '100%' }}>
+                    Please enter your notes before saving!
+                </Alert>
+            </Snackbar>
             <Snackbar
                 open={openCreateSnackbar}
                 autoHideDuration={3000}
